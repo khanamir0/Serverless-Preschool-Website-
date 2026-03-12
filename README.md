@@ -153,5 +153,5 @@ Refer to `config.example.js` for the configuration structure.
 ## 👨‍💻 Built By
 
 **Amir Khan** — Cloud & DevOps Engineer  
-🔗 [linkedin.com/in/amirkhan](linkedin.com/in/amir-khan-6ab830237)  
+🔗 [linkedin.com/in/amirkhan](https://www.linkedin.com/in/amir-khan-6ab830237/)  
 📧 khan.amir07862@gmail.com
