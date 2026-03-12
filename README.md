@@ -87,8 +87,11 @@ DynamoDB (Stores student registration data)
 ### 🌍 Route 53 — DNS Configuration
 ![Route 53](screenshots/Route53.png)
 
+### ☁️ Cloudfront
+![CloudFront](screenshots/Cloudfront.png)
+
 ### 🛡️ WAF & Shield Protection
-![CloudFront WAF](screenshots/CloudFront.png)
+![WAF](screenshots/WAF.png)
 
 ### 🔍 Indexed on Google Search
 ![On Google Search](screenshots/OnGoogleSearch.png)
