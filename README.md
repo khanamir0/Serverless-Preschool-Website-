@@ -60,6 +60,9 @@ DynamoDB (Stores student registration data)
 
 ## 📸 Screenshots
 
+### 🔍 Indexed on Google Search
+![On Google Search](screenshots/OnGoogleSearch.png)
+
 ### 🌐 Website Homepage
 ![Website Homepage](screenshots/Website_homepage.png)
 
@@ -92,9 +95,6 @@ DynamoDB (Stores student registration data)
 
 ### 🛡️ WAF & Shield Protection
 ![WAF](screenshots/WAF.png)
-
-### 🔍 Indexed on Google Search
-![On Google Search](screenshots/OnGoogleSearch.png)
 
 ---
 
