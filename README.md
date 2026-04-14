@@ -1,14 +1,10 @@
-# 🌟 AFK Preschool — Serverless Website on AWS
+🌟 AFK Preschool — Serverless Website on AWS
 
-A fully serverless preschool website built and deployed on AWS. Parents can register their child through an admission form — the data is stored in DynamoDB via a Lambda function triggered by API Gateway. The site is live on a custom domain with HTTPS security.
+A fully serverless preschool website built and deployed on AWS. Parents can register their child through an admission form — the data is stored in DynamoDB via a Lambda function triggered by API Gateway. The site also includes an admin panel for managing a gallery of student activities with secure authentication.
 
-🌐 **Live Site:** [afkschool.com](https://afkschool.com)
+🌐 Live Site: afkschool.com
 
----
-
-## 🏗️ Architecture
-
-```
+🏗️ Architecture
 User visits afkschool.online
         ↓
 Route 53 (Custom Domain + DNS)
@@ -26,84 +22,100 @@ API Gateway (REST API - POST /register)
 Lambda Function (Node.js)
         ↓
 DynamoDB (Stores student registration data)
-```
 
----
+----------------------------------------
 
-## ☁️ AWS Services Used
+Gallery Feature (Public)
+        ↓
+Images stored in S3
+        ↓
+Displayed on website gallery page
 
-| Service | Purpose |
-|---------|---------|
-| Amazon S3 | Static website hosting |
-| Amazon Route 53 | Custom domain and DNS management |
-| AWS Certificate Manager (ACM) | SSL/HTTPS certificate |
-| Amazon CloudFront | CDN for fast global delivery |
-| Amazon API Gateway | REST API to handle form submissions |
-| AWS Lambda | Serverless backend logic (Node.js) |
-| Amazon DynamoDB | NoSQL database for student registrations |
-| AWS WAF & Shield | Web application firewall and DDoS protection |
+----------------------------------------
 
----
+Admin Login (2-Step Authentication)
+        ↓
+Enter Username & Password
+        ↓
+API Gateway
+        ↓
+Lambda validates credentials
+        ↓
+AWS SES sends OTP to email
+        ↓
+User enters OTP
+        ↓
+Lambda verifies OTP
+        ↓
+Admin Dashboard Access
+        ↓
+Upload/Delete Images
+        ↓
+S3 Bucket (Gallery Storage)
+☁️ AWS Services Used
+Service	Purpose
+Amazon S3	Static website hosting + gallery image storage
+Amazon Route 53	Custom domain and DNS management
+AWS Certificate Manager (ACM)	SSL/HTTPS certificate
+Amazon CloudFront	CDN for fast global delivery
+Amazon API Gateway	REST API to handle form & admin requests
+AWS Lambda	Serverless backend logic (Node.js)
+Amazon DynamoDB	NoSQL database for student registrations
+AWS SES	Email service for sending OTP
+AWS WAF & Shield	Web application firewall and DDoS protection
+✨ Features
+Responsive preschool website with modern UI
+Online student admission/registration form
+Serverless backend — no EC2 or traditional server
+Real-time form data stored in DynamoDB
+Custom domain with SSL/HTTPS security
+CloudFront CDN for fast load times globally
+WAF protection against malicious traffic
+SEO optimized — indexed on Google Search
+🆕 Added Features
+Admin login with username & password + OTP verification
+OTP sent via email using AWS SES
+Secure admin dashboard
+Upload images to gallery
+Delete images from gallery
+Public gallery page to display student activity photos
+📸 Screenshots
+🔍 Indexed on Google Search
 
-## ✨ Features
+🌐 Website Homepage
 
-- Responsive preschool website with modern UI
-- Online student admission/registration form
-- Serverless backend — no EC2 or traditional server
-- Real-time form data stored in DynamoDB
-- Custom domain with SSL/HTTPS security
-- CloudFront CDN for fast load times globally
-- WAF protection against malicious traffic
-- SEO optimized — indexed on Google Search
+📋 Registration Page
 
----
+🖼️ Gallery Page (NEW)
 
-## 📸 Screenshots
+🔐 Admin Login (NEW)
 
-### 🔍 Indexed on Google Search
-![On Google Search](screenshots/OnGoogleSearch.png)
+⚙️ Admin Dashboard (NEW)
 
-### 🌐 Website Homepage
-![Website Homepage](screenshots/Website_homepage.png)
+✅ Form Submission Success
 
-### 📋 Registration Page
-![Registration Page](screenshots/RegistrationPage.png)
+🗄️ DynamoDB — Real Student Data
 
-### ✅ Form Submission Success
-![Submitted Toast](screenshots/SubmittedToast.png)
+⚡ Lambda Function (Node.js)
 
-### 🗄️ DynamoDB — Real Student Data
-![DynamoDB Table](screenshots/DynamoDBTable.png)
+⚙️ API Gateway — Routes
 
-### ⚡ Lambda Function (Node.js)
-![Lambda Function](screenshots/LambdaFunction.png)
+🪣 S3 Bucket (Includes Gallery Images)
 
-### ⚙️ API Gateway — POST /register Route
-![API Gateway](screenshots/APIGateway.png)
+🔒 ACM SSL Certificate
 
-### 🪣 S3 Bucket
-![S3 Bucket](screenshots/S3Bucket.png)
+🌍 Route 53 — DNS Configuration
 
-### 🔒 ACM SSL Certificate
-![ACM Certificate](screenshots/ACM.png)
+☁️ Cloudfront
 
-### 🌍 Route 53 — DNS Configuration
-![Route 53](screenshots/Route53.png)
+🛡️ WAF & Shield Protection
 
-### ☁️ Cloudfront
-![CloudFront](screenshots/Cloudfront.png)
-
-### 🛡️ WAF & Shield Protection
-![WAF](screenshots/WAF.png)
-
----
-
-## 🛠️ Project Structure
-
-```
+🛠️ Project Structure
 Serverless-Preschool-Website/
 │
 ├── index.html            # Main HTML structure
+├── gallery.html          # Gallery page (NEW)
+├── admin.html            # Admin panel (NEW)
 ├── config.example.js     # API config template (copy to config.js)
 ├── .gitignore
 │
@@ -111,47 +123,49 @@ Serverless-Preschool-Website/
 │   └── style.css         # All styling and animations
 │
 ├── js/
-│   └── main.js           # Form logic, API calls, animations
+│   ├── main.js           # Form logic
+│   ├── gallery.js        # Gallery functionality (NEW)
+│   └── admin.js          # Admin logic (NEW)
 │
 └── screenshots/          # AWS console and website proof
-```
-
----
-
-## ⚙️ How It Works
-
-1. User opens the website at `afkschool.online`
-2. Route 53 routes the request, CloudFront serves the site via CDN
-3. ACM certificate ensures secure HTTPS connection
-4. S3 hosts the static HTML/CSS/JS files
-5. Parent fills the admission form and clicks Submit
-6. JavaScript sends a POST request to API Gateway endpoint
-7. API Gateway triggers the Lambda function
-8. Lambda parses the form data and stores it in DynamoDB
-9. User sees a success toast — registration complete!
-
----
-
-## 🔐 Security
-
-- API Gateway URL stored in `config.js` which is gitignored
-- IAM roles configured with least-privilege access
-- WAF rules protect against common web attacks
-- SSL/TLS encryption via ACM on all traffic
-- Sensitive AWS account details hidden in all screenshots
-
----
-
-## 📌 Note
+⚙️ How It Works
+User opens the website at afkschool.online
+Route 53 routes the request, CloudFront serves the site via CDN
+ACM certificate ensures secure HTTPS connection
+S3 hosts the static HTML/CSS/JS files
+📌 Admission Flow
+Parent fills the admission form and clicks Submit
+JavaScript sends a POST request to API Gateway
+API Gateway triggers the Lambda function
+Lambda stores data in DynamoDB
+User sees success message
+🖼️ Gallery Flow
+User opens gallery page
+Images are fetched from S3
+Displayed on website
+🔐 Admin Flow
+Admin enters username & password
+OTP sent via AWS SES
+Admin verifies OTP
+Access to dashboard granted
+Admin can upload/delete images
+🔐 Security
+API Gateway URL stored in config.js (gitignored)
+Two-step authentication for admin access
+OTP verification via AWS SES
+IAM roles configured with least privilege access
+WAF rules protect against common web attacks
+SSL/TLS encryption via ACM
+Sensitive AWS account details hidden
+📌 Note
 
 This is a real client project built for AFK Preschool, Lucknow.
-The `config.js` file containing the live API endpoint is not included in this repo for security reasons.
-Refer to `config.example.js` for the configuration structure.
+The config.js file containing the live API endpoint is not included in this repo for security reasons.
+Refer to config.example.js for the configuration structure.
 
----
+👨‍💻 Built By
 
-## 👨‍💻 Built By
+Amir Khan — Cloud & DevOps Engineer
+🔗 linkedin.com/in/amirkhan
 
-**Amir Khan** — Cloud & DevOps Engineer  
-🔗 [linkedin.com/in/amirkhan](https://www.linkedin.com/in/amir-khan-6ab830237/)  
 📧 khan.amir07862@gmail.com
