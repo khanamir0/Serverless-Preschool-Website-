@@ -2,7 +2,7 @@
 
 A fully serverless preschool website built and deployed on AWS. Parents can register their child through an admission form — the data is stored in DynamoDB via a Lambda function triggered by API Gateway. The site is live on a custom domain with HTTPS security.
 
-🌐 **Live Site:** [afkschool.online](https://afkschool.online)
+🌐 **Live Site:** [afkschool.com](https://afkschool.com)
 
 ---
 
