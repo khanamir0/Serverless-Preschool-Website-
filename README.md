@@ -104,35 +104,7 @@ gallery.html fetches photos → displays masonry grid
 - Delete photos (removes from S3 + DynamoDB)
 - View total photos and activity count
 
----
-
-## 🔧 Technical Highlights
-
-### HTTP API vs REST API Event Format
-Lambda code handles both API types using optional chaining:
-```javascript
-const method = event.requestContext?.http?.method || event.httpMethod;
-const path   = event.rawPath || event.path;
 ```
-
-### Photo Upload Flow (Base64 → S3)
-```javascript
-// Frontend: convert file to base64
-const imageData = await fileToBase64(file); // data:image/png;base64,...
-
-// Lambda: decode and upload to S3
-const base64 = imageData.replace(/^data:image\/\w+;base64,/, "");
-const buffer = Buffer.from(base64, "base64");
-await S3.send(new PutObjectCommand({ Bucket, Key, Body: buffer, ContentType }));
-```
-
-### API Gateway URL Structure (HTTP API)
-```
-Full URL = API_ID + /STAGE + /ROUTE
-https://tfb30nked9.execute-api.ap-south-1.amazonaws.com/gallery/gallery
-                                                         ↑stage  ↑route
-```
-
 ### OTP Security Flow
 ```
 Login attempt → credentials match → POST /gallery-otp (action: send)
@@ -160,38 +132,17 @@ Login attempt → credentials match → POST /gallery-otp (action: send)
 ### 📸 Student Gallery Page
 ![Gallery Page](screenshots/GalleryPage.png)
 
-### 🔐 Admin Login — OTP Screen
-![Admin OTP](screenshots/AdminOTP.png)
-
 ### 🖼️ Admin Panel — Upload Photos
 ![Admin Panel](screenshots/AdminPanel.png)
+
+### 🔐 Admin Login — OTP Screen
+![Admin OTP](screenshots/AdminOTP.png)
 
 ### 🗄️ DynamoDB — Registration Data
 ![DynamoDB Registrations](screenshots/DynamoDBTable.png)
 
 ### 🗄️ DynamoDB — Gallery Photos Table
 ![DynamoDB Gallery](screenshots/DynamoDBGallery.png)
-
-### ⚡ Lambda — Gallery Handler
-![Lambda Gallery](screenshots/LambdaGallery.png)
-
-### ⚡ Lambda — OTP Handler
-![Lambda OTP](screenshots/LambdaOTP.png)
-
-### ⚙️ API Gateway — Gallery Routes
-![API Gateway Gallery](screenshots/APIGatewayGallery.png)
-
-### 🪣 S3 — Gallery Bucket
-![S3 Gallery Bucket](screenshots/S3GalleryBucket.png)
-
-### 📧 SES — Verified Identity
-![SES](screenshots/SES.png)
-
-### ⚡ Lambda Function (Registration)
-![Lambda Function](screenshots/LambdaFunction.png)
-
-### ⚙️ API Gateway — POST /register Route
-![API Gateway](screenshots/APIGateway.png)
 
 ### 🪣 S3 Bucket (Website)
 ![S3 Bucket](screenshots/S3Bucket.png)
