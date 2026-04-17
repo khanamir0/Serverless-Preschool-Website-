@@ -111,9 +111,7 @@ Login attempt → credentials match → POST /gallery-otp (action: send)
 → Lambda generates 6-digit OTP → stores in memory with 10min expiry
 → SES sends styled HTML email → Admin enters OTP
 → POST /gallery-otp (action: verify) → match → session granted
-```
 
----
 
 ## 📸 Screenshots
 
